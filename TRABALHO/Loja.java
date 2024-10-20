@@ -1,5 +1,6 @@
 package TRABALHO;
 
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -17,16 +18,35 @@ public class Loja {
         this.pedidos = new ArrayList<>();
     }
 
-    public void cadastrarCliente(Cliente cliente) {
+    public void cadastrarCliente(Cliente cliente) throws RegistroDuplicadoException {
+        for (Cliente cliente2 : clientes) {
+            if(cliente2.getCpf().equals(cliente.getCpf())){
+                throw new RegistroDuplicadoException("O CPF: " + cliente.getCpf() + " Já esta cadastrado em nosso sistema de clientes!");
+            }
+        }
         clientes.add(cliente);
     }
 
-    public void cadastrarVendedor(Vendedor vendedor) {
+    public void cadastrarVendedor(Vendedor vendedor) throws RegistroDuplicadoException {
+        for (Vendedor vendedor2 : vendedores) {
+            if(vendedor2.getCpf().equals(vendedor.getCpf())){
+                throw new RegistroDuplicadoException("O CPF: " + vendedor.getCpf() + " Já esta cadastrado em nosso sistema de vendedores!");
+            } else if(vendedor2.getMatricula().equals(vendedor.getMatricula())){
+                throw new RegistroDuplicadoException("A matricula: " + vendedor.getMatricula() + " Já esta cadastrada em nosso sistema de vendedores!");
+            }
+        }
+        
         vendedores.add(vendedor);
     }
 
-    public void cadastrarProduto(Produto produtoAuxiliar) {
-        produtos.add(produtoAuxiliar);
+    public void cadastrarProduto(Produto produto) throws RegistroDuplicadoException {
+        for (Produto produto2 : produtos) {
+            if(produto2.getCodigo() == produto.getCodigo()){
+                throw new RegistroDuplicadoException("O código: " + produto.getCodigo() + " Já esta cadastrado em nosso sistema de produtos!");
+            }
+        }
+
+        produtos.add(produto);
     }
 
     public void cadastrarPedido(Pedido pedido) {

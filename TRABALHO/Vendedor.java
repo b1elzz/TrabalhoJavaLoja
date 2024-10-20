@@ -33,6 +33,6 @@ public class Vendedor extends Pessoa implements Comparable<Vendedor> {
 
     @Override
     public String toString() {
-        return "Vendedor > " + " Nome: " + super.getNome() + " CPF: " + super.getCpf() + " Matricula: " + matricula + " Percentual Comissão: " + percentualComissao + " Data Cadastro: " + dtAdmissao;
+        return "Vendedor > " + " Nome: " + super.getNome() + " CPF: " + super.getCpf() + " Matricula: " + matricula + " Percentual Comissão: " + percentualComissao * 100 + ("%") + " Data Cadastro: " + dtAdmissao;
     }
 }

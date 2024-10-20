@@ -14,9 +14,8 @@ public class ProgramaLoja {
             try {
 
                 mostrarMenu();
-                int opcao = teclado.lerInt("Digite a opção:  ");
-                teclado.lerString("");
-
+                int opcao = teclado.lerInt("Digite a opção: ");
+                teclado.limparBuffer();
                 switch (opcao) {
                     case 1:
                         cadastrarProduto();
@@ -90,7 +89,12 @@ public class ProgramaLoja {
         int codigo = teclado.lerInt("Código do produto: ");
 
         Produto produto = new Produto(nome, valor, quantidadeMaxima, codigo);
-        loja.cadastrarProduto(produto);
+        try{
+            System.out.println("PRODUTO CADASTRADO COM SUCESSO!");
+            loja.cadastrarProduto(produto);
+        } catch(RegistroDuplicadoException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     private static void cadastrarCliente() {
@@ -99,7 +103,13 @@ public class ProgramaLoja {
         LocalDate dtCadastro = LocalDate.now();
 
         Cliente cliente = new Cliente(nome, cpf, dtCadastro);
+
+        try{
+            System.out.println("CLIENTE CADASTRADO COM SUCESSO!");
         loja.cadastrarCliente(cliente);
+        } catch(RegistroDuplicadoException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     private static void cadastrarVendedor() {
@@ -112,32 +122,38 @@ public class ProgramaLoja {
         LocalDate dtAdmissao = LocalDate.now();
 
         Vendedor vendedor = new Vendedor(nome, cpf, matricula, percentualComissao, dtAdmissao);
+
+        try{
+            System.out.println("VENDEDOR CADASTRADO COM SUCESSO!");
         loja.cadastrarVendedor(vendedor);
+        } catch(RegistroDuplicadoException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     private static void listarClientes() {
-        System.out.println("Clientes cadastrados:");
+        System.out.println("Clientes cadastrados: ");
         for (Cliente cliente : loja.listarClientes()) {
             System.out.println(cliente);
         }
     }
 
     private static void listarProdutos() {
-        System.out.println("Produtos cadastrados:");
+        System.out.println("Produtos cadastrados: ");
         for (Produto produto : loja.listarProdutos()) {
             System.out.println(produto);
         }
     }
 
     private static void listarVendedores() {
-        System.out.println("Vendedores cadastrados:");
+        System.out.println("Vendedores cadastrados: ");
         for (Vendedor vendedor : loja.listarVendedores()) {
             System.out.println(vendedor);
         }
     }
 
     private static void listarPedidos() {
-        System.out.println("Pedidos cadastrados:");
+        System.out.println("Pedidos cadastrados: ");
         for (Pedido pedido : loja.listarPedidos()) {
             System.out.println(pedido);
         }
@@ -164,7 +180,9 @@ public class ProgramaLoja {
 
                 pedido.adicionarItem(produto, quantidade);
 
+                teclado.limparBuffer();
                 String adicionar = teclado.lerString("Adicionar mais itens? (Sim/Não)").toLowerCase();
+                
                 if (adicionar.equals("sim")) {
                     adicionarMaisItens = true;
                 } else if (adicionar.equals("não") || adicionar.equals("nao")) {
@@ -175,7 +193,8 @@ public class ProgramaLoja {
                 }
 
             } while (adicionarMaisItens);
-
+            
+            System.out.println("PEDIDO REALIZADO COM SUCESSO!");
             loja.cadastrarPedido(pedido);
 
         } catch (Exception e) {

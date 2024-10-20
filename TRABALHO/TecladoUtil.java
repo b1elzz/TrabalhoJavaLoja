@@ -6,17 +6,21 @@ public class TecladoUtil {
     Scanner teclado = new Scanner(System.in);
 
     public Integer lerInt(String mensagem){
-        Integer inteiro = teclado.nextInt();
-        return inteiro;
+        System.out.println(mensagem);
+        return teclado.nextInt();
     }
 
     public String lerString(String mensagem){
-        String texto = teclado.nextLine();
-        return texto;
+        System.out.println(mensagem);
+        return teclado.nextLine();
+    }
+
+    public String limparBuffer(){
+        return teclado.nextLine();
     }
 
     public double lerDouble(String mensagem){
-        double valor = teclado.nextDouble();
-        return valor;
+        System.out.println(mensagem);
+        return teclado.nextDouble();
     }
 }
