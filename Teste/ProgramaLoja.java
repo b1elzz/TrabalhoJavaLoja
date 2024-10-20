@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 
-public class Main {
+public class ProgramaLoja {
     private static Loja loja = new Loja();
     private static Scanner scanner = new Scanner(System.in);
 
