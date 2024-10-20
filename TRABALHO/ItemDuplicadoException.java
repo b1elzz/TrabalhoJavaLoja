@@ -1,4 +1,4 @@
-package Teste;
+package TRABALHO;
 
 class ItemDuplicadoException extends Exception {
     public ItemDuplicadoException(String message) {

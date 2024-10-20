@@ -1,11 +1,8 @@
-package Teste;
+package TRABALHO;
 
-import java.util.*;
 import java.util.List;
 import java.util.ArrayList;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class Pedido {
     private List<PedidoItem> itens;

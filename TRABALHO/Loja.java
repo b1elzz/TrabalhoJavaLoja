@@ -1,9 +1,5 @@
-package Teste;
+package TRABALHO;
 
-import java.util.Map;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -29,8 +25,8 @@ public class Loja {
         vendedores.add(vendedor);
     }
 
-    public void cadastrarProduto(Produto produto) {
-        produtos.add(produto);
+    public void cadastrarProduto(Produto produtoAuxiliar) {
+        produtos.add(produtoAuxiliar);
     }
 
     public void cadastrarPedido(Pedido pedido) {
@@ -75,7 +71,6 @@ public class Loja {
         }
         return totalLiquido;
     }
-    
 
     public Cliente buscarCliente(String cpf) throws RegistroNaoEncontradoException {
         for (Cliente cliente : clientes) {
@@ -85,7 +80,6 @@ public class Loja {
         }
         throw new RegistroNaoEncontradoException("Cliente não encontrado");
     }
-    
 
     public Vendedor buscarVendedor(String cpf) throws RegistroNaoEncontradoException {
         for (Vendedor vendedor : vendedores) {
@@ -95,7 +89,6 @@ public class Loja {
         }
         throw new RegistroNaoEncontradoException("Vendedor não encontrado");
     }
-    
 
     public Produto buscarProduto(int codigo) throws RegistroNaoEncontradoException {
         for (Produto produto : produtos) {
@@ -105,5 +98,5 @@ public class Loja {
         }
         throw new RegistroNaoEncontradoException("Produto não encontrado");
     }
-    
+
 }

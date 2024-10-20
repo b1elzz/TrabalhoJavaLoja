@@ -1,4 +1,4 @@
-package Teste;
+package TRABALHO;
 
 public abstract class Pessoa {
     private String nome;

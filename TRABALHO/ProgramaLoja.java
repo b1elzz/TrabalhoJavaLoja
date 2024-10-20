@@ -1,21 +1,21 @@
-package Teste;
+package TRABALHO;
 
 import java.time.LocalDate;
-import java.util.Scanner;
 import java.util.InputMismatchException;
 
 public class ProgramaLoja {
     private static Loja loja = new Loja();
-    private static Scanner scanner = new Scanner(System.in);
+    private static TecladoUtil teclado = new TecladoUtil();
 
     public static void main(String[] args) {
         boolean sair = true;
 
         do {
             try {
+
                 mostrarMenu();
-                int opcao = scanner.nextInt();
-                scanner.nextLine();
+                int opcao = teclado.lerInt("Digite a opção:  ");
+                teclado.lerString("");
 
                 switch (opcao) {
                     case 1:
@@ -59,51 +59,43 @@ public class ProgramaLoja {
 
             } catch (InputMismatchException e) {
                 System.out.println("Opções apenas números inteiros validos!");
-                scanner.nextLine();
+                teclado.lerString(" ");
             }
         } while (sair);
     }
 
-    private static void mostrarMenu(){
-        
-            System.out.println("========================================");
-            System.out.println("|              MENU                    |");
-            System.out.println("========================================");
-            System.out.println("|  1. Cadastro de Produtos             |");
-            System.out.println("|  2. Cadastro de Clientes             |");
-            System.out.println("|  3. Cadastro de Vendedores           |");
-            System.out.println("|  4. Listar Clientes                  |");
-            System.out.println("|  5. Listar Produtos                  |");
-            System.out.println("|  6. Listar Vendedores                |");
-            System.out.println("|  7. Listar Pedidos                   |");
-            System.out.println("|  8. Adicionar Pedido                 |");
-            System.out.println("|  9. Total Bruto de Vendas            |");
-            System.out.println("| 10. Total Líquido de Vendas          |");
-            System.out.println("|  0. Sair                             |");
-            System.out.println("=======================================");
-            System.out.print("Escolha uma opção: ");
-        
+    private static void mostrarMenu() {
+
+        System.out.println("========================================");
+        System.out.println("|              MENU                    |");
+        System.out.println("========================================");
+        System.out.println("|  1. Cadastro de Produtos             |");
+        System.out.println("|  2. Cadastro de Clientes             |");
+        System.out.println("|  3. Cadastro de Vendedores           |");
+        System.out.println("|  4. Listar Clientes                  |");
+        System.out.println("|  5. Listar Produtos                  |");
+        System.out.println("|  6. Listar Vendedores                |");
+        System.out.println("|  7. Listar Pedidos                   |");
+        System.out.println("|  8. Adicionar Pedido                 |");
+        System.out.println("|  9. Total Bruto de Vendas            |");
+        System.out.println("| 10. Total Líquido de Vendas          |");
+        System.out.println("|  0. Sair                             |");
+        System.out.println("=======================================");
     }
 
     private static void cadastrarProduto() {
-        System.out.println("Nome do produto: ");
-        String nome = scanner.nextLine();
-        System.out.println("Valor do produto: ");
-        double valor = scanner.nextDouble();
-        System.out.println("Quantidade máxima: ");
-        int quantidadeMaxima = scanner.nextInt();
-        System.out.println("Código do produto: ");
-        int codigo = scanner.nextInt();
+        String nome = teclado.lerString("Nome do produto: ");
+        double valor = teclado.lerDouble("Valor do produto: ");
+        int quantidadeMaxima = teclado.lerInt("Estoque Disponivel: ");
+        int codigo = teclado.lerInt("Código do produto: ");
 
         Produto produto = new Produto(nome, valor, quantidadeMaxima, codigo);
         loja.cadastrarProduto(produto);
     }
 
     private static void cadastrarCliente() {
-        System.out.println("Nome do cliente: ");
-        String nome = scanner.nextLine();
-        System.out.println("CPF do cliente: ");
-        String cpf = scanner.nextLine();
+        String nome = teclado.lerString("Nome do cliente: ");
+        String cpf = teclado.lerString("Cpf do cliente: ");
         LocalDate dtCadastro = LocalDate.now();
 
         Cliente cliente = new Cliente(nome, cpf, dtCadastro);
@@ -111,14 +103,12 @@ public class ProgramaLoja {
     }
 
     private static void cadastrarVendedor() {
-        System.out.println("Nome do vendedor: ");
-        String nome = scanner.nextLine();
-        System.out.println("CPF do vendedor: ");
-        String cpf = scanner.nextLine();
-        System.out.println("Matrícula: ");
-        String matricula = scanner.nextLine();
-        System.out.println("Percentual de comissão (Colocar em decimal! Exemplo: 0,10 = 10%): ");
-        double percentualComissao = scanner.nextDouble();
+
+        String nome = teclado.lerString("Nome do vendedor: ");
+        String cpf = teclado.lerString("CPF do vendedor: ");
+        String matricula = teclado.lerString("Matricula do vendedor: ");
+        double percentualComissao = teclado
+                .lerDouble("Percentual de comissão (Colocar em decimal! Exemplo: 0,10 = 10%): ");
         LocalDate dtAdmissao = LocalDate.now();
 
         Vendedor vendedor = new Vendedor(nome, cpf, matricula, percentualComissao, dtAdmissao);
@@ -155,29 +145,34 @@ public class ProgramaLoja {
 
     private static void adicionarPedido() {
         try {
-            System.out.println("CPF do cliente: ");
-            String cpfCliente = scanner.nextLine();
+
+            String cpfCliente = teclado.lerString("CPF do cliente: ");
             Cliente cliente = loja.buscarCliente(cpfCliente);
 
-            System.out.println("CPF do vendedor: ");
-            String cpfVendedor = scanner.nextLine();
+            String cpfVendedor = teclado.lerString("CPF do vendedor: ");
             Vendedor vendedor = loja.buscarVendedor(cpfVendedor);
 
             Pedido pedido = new Pedido(cliente, vendedor);
 
             boolean adicionarMaisItens;
             do {
-                System.out.println("Código do produto: ");
-                int codigoProduto = scanner.nextInt();
+
+                int codigoProduto = teclado.lerInt("Código do produto: ");
                 Produto produto = loja.buscarProduto(codigoProduto);
 
-                System.out.println("Quantidade: ");
-                int quantidade = scanner.nextInt();
+                int quantidade = teclado.lerInt("Quantidade: ");
 
                 pedido.adicionarItem(produto, quantidade);
 
-                System.out.println("Adicionar mais itens? (true/false)");
-                adicionarMaisItens = scanner.nextBoolean();
+                String adicionar = teclado.lerString("Adicionar mais itens? (Sim/Não)").toLowerCase();
+                if (adicionar.equals("sim")) {
+                    adicionarMaisItens = true;
+                } else if (adicionar.equals("não") || adicionar.equals("nao")) {
+                    adicionarMaisItens = false;
+                } else {
+                    System.out.println("Opção invalida! Considerado como não =D ");
+                    adicionarMaisItens = false;
+                }
 
             } while (adicionarMaisItens);
 

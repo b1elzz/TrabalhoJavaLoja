@@ -1,4 +1,4 @@
-package Teste;
+package TRABALHO;
 
 public class Produto implements Comparable<Produto> {
     private String nome;
